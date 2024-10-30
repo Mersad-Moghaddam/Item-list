@@ -14,6 +14,11 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
+
+  /// Builds the main application widget.
+  ///
+  /// This widget is a [MaterialApp] with a specified title and theme.
+  /// It hides the debug banner and sets the [HomeScreen] as the home widget.
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,

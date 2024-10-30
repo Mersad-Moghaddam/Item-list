@@ -1,11 +1,11 @@
 import 'package:custom_container/data/data.dart';
 
-class ItemEvent {}
+abstract class ItemEvent {}
 
-class AddItemEvent extends ItemEvent {
+class IncreaseQuantityEvent extends ItemEvent {
   final Item item;
 
-  AddItemEvent(this.item);
+  IncreaseQuantityEvent(this.item);
 }
 
 class RemoveItemEvent extends ItemEvent {
@@ -14,16 +14,10 @@ class RemoveItemEvent extends ItemEvent {
   RemoveItemEvent(this.item);
 }
 
-class RestoreItemsEvent extends ItemEvent {}
-
-class IncreaseQuantityEvent extends ItemEvent {
-  final Item item;
-
-  IncreaseQuantityEvent(this.item);
-}
-
 class DecreaseQuantityEvent extends ItemEvent {
   final Item item;
 
   DecreaseQuantityEvent(this.item);
 }
+
+class RestoreItemsEvent extends ItemEvent {}

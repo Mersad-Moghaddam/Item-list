@@ -1,7 +1,6 @@
 import 'package:custom_container/home/bloc/item_event.dart';
 import 'package:custom_container/home/bloc/item_state.dart';
 import 'package:custom_container/data/data.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemBloc extends Bloc<ItemEvent, ItemState> {
@@ -22,9 +21,12 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
   /// and removing it from the list of items in the state.
   void _onRemoveItemEvent(RemoveItemEvent event, Emitter<ItemState> emit) {
     List<Item> items = state.items;
-    _deletedItems.add(event.item);
-    items.remove(event.item);
-    emit(state.copyWith(items: items));
+    int index = items.indexWhere((item) => item == event.item);
+    if (index != -1) {
+      _deletedItems.add(event.item);
+      items.remove(event.item);
+      emit(state.copyWith(items: items));
+    }
   }
 
   /// Handles [RestoreItemsEvent] by restoring all deleted items to the current

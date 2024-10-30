@@ -1,9 +1,7 @@
-import 'package:custom_container/data/data.dart';
 import 'package:custom_container/home/bloc/item_bloc.dart';
 import 'package:custom_container/home/bloc/item_event.dart';
 import 'package:custom_container/home/bloc/item_state.dart';
-import 'package:custom_container/home/widgets/my_items.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:custom_container/home/widgets/build_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,42 +28,12 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Home Screen'),
           ),
-          body: ShowItem(
-            state: state,
-          ),
+          body: BuildItems(state: state),
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
             tooltip: 'Restore items',
             child: const Icon(Icons.restore),
           ),
-        );
-      },
-    );
-  }
-}
-
-class ShowItem extends StatelessWidget {
-  final ItemState state;
-  const ShowItem({
-    required this.state,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final itemNotifiers = state.items
-        .map((item) => ValueNotifier(item))
-        .toList(); // Create a separate ValueNotifier for each item
-
-    return ListView.builder(
-      itemCount: state.items.length,
-      itemBuilder: (context, index) {
-        final itemNotifier = itemNotifiers[index];
-        return ValueListenableBuilder<Item>(
-          valueListenable: itemNotifier,
-          builder: (context, item, child) {
-            return MyItems(item: item);
-          },
         );
       },
     );

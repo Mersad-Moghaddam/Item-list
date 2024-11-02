@@ -35,6 +35,7 @@ class MyItems extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: ListTile(
+        key: ValueKey(item.key),
         leading: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(item.image)),

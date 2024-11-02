@@ -5,21 +5,18 @@ import 'package:flutter/material.dart';
 
 class BuildItems extends StatelessWidget {
   final ItemState state;
-  const BuildItems({
-    required this.state,
-    super.key,
-  });
+  final Map<String, ValueNotifier<Item>> _itemNotifiers = {};
+
+  BuildItems({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
-    final itemNotifiers = state.items
-        .map((item) => ValueNotifier(item))
-        .toList(); // Create a separate ValueNotifier for each item
-
     return ListView.builder(
       itemCount: state.items.length,
       itemBuilder: (context, index) {
-        final itemNotifier = itemNotifiers[index];
+        final item = state.items[index];
+        final itemNotifier =
+            _itemNotifiers[item.key.toString()] ??= ValueNotifier(item);
         return ValueListenableBuilder<Item>(
           valueListenable: itemNotifier,
           builder: (context, item, child) {
